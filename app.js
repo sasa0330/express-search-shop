@@ -20,8 +20,10 @@ app.get('/api/shopList', (req, res) => {
   const hotpepper_lng = req.query.lng;
   const hotpepper_genre = req.query.shopGenre;
   const requestUrl = `${HOTPEPPER_BASE_URL}?key=${HOTPEPPER_API_KEY}&lat=${hotpepper_lat}&lng=${hotpepper_lng}&genre=${hotpepper_genre}&format=json`;
-  console.log(req);
-  console.log(requestUrl);
+
+  if (!hotpepper_lat || !hotpepper_lng || !hotpepper_genre) {
+    res.json("パラメーターの指定が不足しています。");
+  }
 
   fetch(requestUrl)
     .then((response) => response.json())
