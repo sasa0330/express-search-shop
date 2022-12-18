@@ -1,7 +1,14 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
+const cors = require('cors');
 const fetch = require("node-fetch");
+
+app.use(cors({
+  origin: 'http://localhost:3000', //アクセス許可するオリジン
+  credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
+  optionsSuccessStatus: 200 //レスポンスstatusを200に設定
+}))
 
 app.get("/", (req, res) => res.send('Hello'));
 
