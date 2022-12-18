@@ -16,11 +16,12 @@ app.get("/", (req, res) => res.send('Hello'));
 app.get('/api/shopList', (req, res) => {
   const HOTPEPPER_API_KEY = "a6972642ce7d9bcd";
   const HOTPEPPER_BASE_URL = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/";
-  const hotpepper_lat = 35.6917517;
-  const hotpepper_lng = 139.7720934;
-  const hotpepper_genre = "G001";
+  const hotpepper_lat = req.query.lat;
+  const hotpepper_lng = req.query.lng;
+  const hotpepper_genre = req.query.shopGenre;
   const requestUrl = `${HOTPEPPER_BASE_URL}?key=${HOTPEPPER_API_KEY}&lat=${hotpepper_lat}&lng=${hotpepper_lng}&genre=${hotpepper_genre}&format=json`;
-
+  console.log(req);
+  console.log(requestUrl);
 
   fetch(requestUrl)
     .then((response) => response.json())
