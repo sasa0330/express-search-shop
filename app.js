@@ -39,7 +39,7 @@ app.get("/api/shopList", (req, res) => {
   };
   const reqLat = req.query.lat;
   const reqLng = req.query.lng;
-  const reqGenre = req.query.shopGenre;
+  const reqGenre = req.query.genre;
   const setParamLat = checkBrank(reqLat, `&lat=${reqLat}`);
   const setParamLng = checkBrank(reqLng, `&lng=${reqLng}`);
   const setParamGenre = checkBrank(reqGenre, `&genre=${reqGenre}`);
