@@ -55,13 +55,58 @@ app.get("/api/shopList", (req, res) => {
     .then((data) => {
       const responseShopList = data.results.shop.map((item) => ({
         itemId: item.id,
-        photoPcM: item.photo.pc.m,
+        photo: item.photo.pc.l,
         shopName: item.name,
         lunch: item.lunch,
         budgetName: item.budget.name,
         address: item.address,
+        access: item.access,
+        smoking: item.non_smoking,
       }));
       res.json(responseShopList);
+    });
+});
+
+app.get("/api/shopListFromGoogle", (req, res) => {
+  const baseUrl =
+    "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+  const apiKey = "AIzaSyA4obQYITBIkcLQ8jZWsabjl8zQtvOxwMg";
+  const lat = 35.7778212;
+  const lng = 139.7215721;
+  const types = "restaurant";
+  //types
+  //https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=ja
+  const requestUrl = `${baseUrl}location=${lat},${lng}&radius=250&types=${types}&language=ja&key=${apiKey}`;
+
+  fetch(requestUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const responseShopList = data.results.map((item) => ({
+        itemName: item.name,
+      }));
+      console.log(data);
+      //maps.googleapis.com/maps/api/place/details/output?place_id=ChIJmy5MyOKSGGARC4WwDu1e9u8
+      https: res.json(responseShopList);
+    });
+});
+app.get("/api/shopDetailFromGoogle", (req, res) => {
+  const baseUrl = "https://maps.googleapis.com/maps/api/place/details/json?";
+  const apiKey = "AIzaSyA4obQYITBIkcLQ8jZWsabjl8zQtvOxwMg";
+  const fields = `name%2Crating%2Cformatted_phone_number`;
+  const place_id = `ChIJmy5MyOKSGGARC4WwDu1e9u8`;
+  //types
+  //https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=ja
+  const requestUrl = `${baseUrl}fields=${fields}&place_id=${place_id}&key=${apiKey}`;
+
+  fetch(requestUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      // const responseShopList = data.results.map((item) => ({
+      //   itemName: item.name,
+      // }));
+      console.log(data);
+      //maps.googleapis.com/maps/api/place/details/output?place_id=ChIJmy5MyOKSGGARC4WwDu1e9u8
+      https: res.json(data);
     });
 });
 
