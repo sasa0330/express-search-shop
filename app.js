@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 const origins = [
   "http://localhost:3000",
   "https://sasa30.com",
-  "https://classy-pika-716c48.netlify.app",
+  "https://chikaba.netlify.app",
 ];
 app.use(
   cors({
