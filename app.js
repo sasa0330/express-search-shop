@@ -62,6 +62,7 @@ app.get("/api/shopList", (req, res) => {
         address: item.address,
         access: item.access,
         smoking: item.non_smoking,
+        catch: item.catch,
       }));
       res.json(responseShopList);
     });
